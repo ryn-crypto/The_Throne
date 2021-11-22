@@ -126,7 +126,7 @@ class Auth extends CI_Controller {
 					redirect('auth');
 				}
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun belum teraktifasi!</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun sedang dalam masa suspend!</div>');
 				redirect('auth');
 			}
 		} else {

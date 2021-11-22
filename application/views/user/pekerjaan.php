@@ -30,29 +30,21 @@
                   <th scope="col">Nama Game</th>
                   <th scope="col">Tier</th>
                   <th scope="col">Level</th>
-                  <th scope="col" style="width: 200px">Tindakan</th>
+                  <th scope="col" style="width: 170px">Tindakan</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">1</th>
                   <td>12345678910</td>
-                  <td>Lorem ipsum dolor sit amet consectetur.</td>
-                  <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                  <td>Lorem ipsum dolor, sit amet consectetur adipisicing.</td>
-                  <td>Lorem, ipsum.</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
+                  <td>Mobile Legend</td>
+                  <td>Master</td>
+                  <td>*1 s/d *5</td>
+                  <td class="text-muted">
+                    <a href="" class="btn btn-outline-info">rincian</a>
+                    |
+                    <a href="" class="btn btn-outline-warning">Raid</a>
+                  </td>
                 </tr>
               </tbody>
             </table>
