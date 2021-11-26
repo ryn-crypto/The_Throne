@@ -204,7 +204,7 @@ class User extends CI_Controller
         $this->load->view('templates2/header', $data);
         $this->load->view('templates2/sidebar', $data);
         $this->load->view('templates2/topbar', $data);
-        $this->load->view('user/pekerjaan', $data);
+        $this->load->view('user/raid', $data);
         $this->load->view('templates2/footer');
     }
 }

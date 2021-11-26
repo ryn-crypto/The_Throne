@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>GoodGames | Komunitas dan Jasa</title>
+    <title>The Throne</title>
 
     <meta name="description" content="GoodGames - Bootstrap template for communities and games store">
     <meta name="keywords" content="game, gaming, template, HTML template, responsive, Bootstrap, premium">
     <meta name="author" content="_nK">
 
-    <link rel="icon" type="image/png" href="<?= base_url()?>assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="<?= base_url()?>assets/dist/img/throneLogo.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -65,7 +65,7 @@
     
     
 <!-- START: login -->
-<div class="nk-contacts-top">
+<!-- <div class="nk-contacts-top">
     <div class="container">
         <div class="nk-contacts-right">
             <ul class="nk-contacts-icons">
@@ -77,7 +77,7 @@
             </ul>
         </div>
     </div>
-</div>
+</div> -->
 <!-- END: login -->
 
     
@@ -88,7 +88,7 @@
             <div class="nk-nav-table">
                 
                 <a href="index.html" class="nk-nav-logo">
-                    <img src="assets/images/logo.png" alt="GoodGames" width="199">
+                    <img src="<?= base_url('assets/images/logothrone.png')?>" alt="GoodGames" width="199">
                 </a>
                 
                 <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
@@ -102,7 +102,7 @@
                         </ul>
                     </li>
                     <li class=" nk-drop-item">
-                        <a href="#">Artikel</a>
+                        <a>Artikel</a>
                         <ul class="dropdown">
                             <li> <a href="#berita">Terbaru</a></li>
                             <li> <a href="#turnamen">Turnamen</a></li>
@@ -112,7 +112,7 @@
                     <li class=" nk-drop-item"><a href="#">Toko</a>
                         <ul class="dropdown">            
                             <li><a href="store.html">Items</a></li>
-                            <li><a href="store.html">Joki Akun</a></li>
+                            <li><a href="<?= base_url('home/list_game') ?>">Joki Akun</a></li>
                         </ul>
                     </li>
                 </ul>

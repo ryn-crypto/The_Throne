@@ -685,7 +685,7 @@
 
         
 <!-- START: Login Modal -->
-<div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- <div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -738,5 +738,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- END: Login Modal -->

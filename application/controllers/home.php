@@ -21,7 +21,12 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('templates/header');
-		$this->load->view('mainpage');
+		$this->load->view('home/mainpage');
 		$this->load->view('templates/footer');
+	}
+
+	public function list_game()
+	{
+		$this->load->view('home/joki.php');
 	}
 }

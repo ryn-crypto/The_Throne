@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <div class="brand-link">
-      <img src="<?= base_url('assets/') ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light"><b>Game Center</b></span>
+      <img src="<?= base_url('assets/') ?>dist/img/throneLogo.png" alt="Throne Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light"><h4 class="font-weight-bold">The Throne</h4></span>
     </div>
 
     <!-- Sidebar -->
