@@ -24,9 +24,95 @@ class Home extends CI_Controller {
 		$this->load->view('home/mainpage');
 		$this->load->view('templates/footer');
 	}
-
-	public function list_game()
+	
+	public function daftargame()
 	{
-		$this->load->view('home/joki.php');
+		$this->load->model('customer');
+		$game['daftar_game'] = $this->customer->index();
+
+		$this->load->view('templates/header2');
+		$this->load->view('home/daftargame', $game);
+		$this->load->view('templates/footer2');
 	}
+
+
+	public function form()
+	{
+
+		$game['id'] = $this->uri->segment(3);
+		$this->load->model('customer');
+		$game['dipilih'] = $this->customer->gamedipilih($game['id']);
+
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', 
+		[
+			'required' => 'email harus diisi!',
+			'valid_email' => 'email tidak valid!'
+		]);
+		
+		$this->form_validation->set_rules('idgame', 'Id Game', 'required|trim', 
+		[
+			'required' => 'Id Game harus diisi!'
+		]);
+		
+		$this->form_validation->set_rules('idserver', 'Id Server', 'required|trim', 
+		[
+			'required' => 'Id server harus diisi!'
+		]);
+
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('templates/header2');
+			$this->load->view('home/form', $game);
+			$this->load->view('templates/footer2');
+		} 
+		else 
+		{
+			// load library
+			$this->load->helper('string');
+			$this->load->model('customer');
+			
+			// data dari post
+			$game['select'] = $this->input->post();
+			
+			$que = [
+				'game_id' => $game['id'],
+				'tier' => $game['select']['tier']
+			];
+			
+			// ambil data dengan library
+			$nopesan = random_string('alnum', 11);
+			$select = $this->customer->select($que);
+			$total = ($select[0]['harga'])*($game['select']['bintang']);
+
+			$submit = [
+				'id_harga' => $game['id'],
+				'no_pesanan' => $nopesan,
+				'id_game' => $game['select']['idgame'],
+				'id_server' => $game['select']['idserver'],
+				'total' => $total
+			];
+
+			$this->customer->insert($submit);
+			$this->session->set_userdata('game', $submit);
+			$this->session->set_userdata('dipilih', $select[0]);
+
+			redirect('home/faktur');
+		}
+	
+	}
+
+	public function faktur()
+	{
+
+		var_dump($this->session->userdata('game'));
+		var_dump($this->session->userdata('dipilih'));
+		die;
+
+		$this->load->view('templates/header2');
+		$this->load->view('home/faktur');
+		$this->load->view('templates/footer3');
+
+	}
+	
 }

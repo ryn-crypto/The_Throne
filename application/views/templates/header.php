@@ -87,7 +87,7 @@
         <div class="container">
             <div class="nk-nav-table">
                 
-                <a href="index.html" class="nk-nav-logo">
+                <a href="<?= base_url('home') ?>" class="nk-nav-logo">
                     <img src="<?= base_url('assets/images/logothrone.png')?>" alt="GoodGames" width="199">
                 </a>
                 
@@ -112,7 +112,7 @@
                     <li class=" nk-drop-item"><a href="#">Toko</a>
                         <ul class="dropdown">            
                             <li><a href="store.html">Items</a></li>
-                            <li><a href="<?= base_url('home/list_game') ?>">Joki Akun</a></li>
+                            <li><a href="<?= base_url('home/daftargame') ?>">Joki Akun</a></li>
                         </ul>
                     </li>
                 </ul>
