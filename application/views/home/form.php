@@ -7,7 +7,7 @@
                     <form action="<?= base_url('home/form/').$id ?>" method="post" class="nk-form text-white bg-dark">
                         <div class="form-group mt-10 mb-10">
                             <label for="game" class="text-danger">Game Terpilih</label>
-                            <input type="text" class="form-control bg-dark rounded" id="game" name="game" value="<?= $dipilih['nama']?>" placeholder="Nama Game" readonly>
+                            <input type="text" class="form-control bg-dark rounded" id="game" name="game" value="<?= $dipilih[0]['nama']?>" placeholder="Nama Game" readonly>
                         </div>
                         <div class="row">
                             <div class="col-md form-group mt-10 mb-10">
@@ -25,11 +25,9 @@
                             <div class="col-md form-group mt-10 mb-10">
                                 <label for="tier" class="text-danger">Pilih tier Kamu</label>
                                 <select class="form-control rounded bg-secondary" id="tier" name="tier">
-                                    <option class="text-white">warrior1</option>
-                                    <option class="text-white">warrior2</option>
-                                    <option class="text-white">Warrior3</option>
-                                    <option class="text-white">4</option>
-                                    <option class="text-white">5</option>
+                                    <?php foreach($dipilih as $s) : ?>
+                                    <option class="text-white"><?= $s['tier']; ?></option>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                             <div class="col-md form-group mt-10 mb-10">

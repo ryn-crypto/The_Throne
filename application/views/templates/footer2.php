@@ -1,5 +1,5 @@
-<img class="nk-page-background-top" src="<?= base_url()?>assets/images/dark_3.jpg" alt="">
-<!-- <img class="nk-page-background-bottom" src="<?= base_url()?>assets/images/bg-bottom.png" alt=""> -->
+<img class="nk-page-background-top" src="<?= base_url()?>assets/images/bg-top.png" alt="">
+<img class="nk-page-background-bottom" src="<?= base_url()?>assets/images/bg-bottom.png" alt="">
 
 <!-- END: Page Background -->
 
