@@ -2,7 +2,7 @@
 <!-- title -->
   <section class="content-header">
     <div class="container-fluid">
-      <div class="row mb-2">
+      <div class="row">
         <div class="col-sm-6">
           <h2 class="text-dark mt-20 ml-20">Invoice</h2>
         </div>
@@ -18,6 +18,7 @@
           <div class="callout callout-info">
             <h5><i class="fas fa-info"></i> Note:</h5>
             Halaman ini bisa dicetak untuk pembayaran, dengan menekan tombol cetak yang ada di bawah.
+            <p class="bg-danger rounded text-center">selesaikan pembayaran sebelum waktu habis</p>
           </div>
 
           <div class="invoice p-3 mb-3">
@@ -25,7 +26,7 @@
               <div class="col-12">
                 <h4 class="text-dark">
                   <i class="fas fa-globe"></i> The Throne
-                  <small class="float-right">Date: <?= date('d-m-Y-h-l-a')?></small>
+                  <small class="float-right">Waktu Pesan: <?= date('d F Y', $faktur['waktu_order']); ?></small>
                 </h4>
               </div>
             </div>
@@ -41,15 +42,14 @@
               <div class="col-sm-4 invoice-col">
                 To
                 <address>
-                  <strong>Nama pembeli</strong><br>
-                  Email: john.doe@example.com
+                  <strong><?= strtok($post['email'], '@'); ?></strong><br>
+                  Email: <?= $post['email']; ?>
                 </address>
               </div>
               <div class="col-sm-4 invoice-col">
-                <b>Invoice No inv</b><br>
-                <br>
-                <b>No Pemesanan:</b> 4F3S8J<br>
-                <b>Tenggat Bayar:</b> 2/22/2014<br>
+                <b>Invoice No</b><br>
+                <b>No Pemesanan :</b> <?= $faktur['no_pesanan']; ?><br>
+                <b>Tenggat Bayar : </b>  <?= date("d F Y", strtotime("+1 days", $faktur['waktu_order'])); ?><br>
               </div>
             </div>
             <div class="row">
@@ -64,9 +64,9 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <td>Call of Duty</td>
-                    <td>40</td>
-                    <td>$64.50</td>
+                    <td><?= $post['game']; ?></td>
+                    <td><?= $post['bintang']; ?></td>
+                    <td>Rp.<?= $faktur['total']; ?>,00</td>
                   </tr>
                   </tbody>
                 </table>
@@ -77,16 +77,16 @@
               <div class="col-6">
                 <p class="lead">Cara Pembayaran:</p>
                 <div class="row">
-                  <div class="col-md-3 col-xs-6 mt-1">
+                  <div class="col-md-3 col-6 mt-1">
                     <img src="<?= base_url('assets/')?>dist/img/credit/visa.png" alt="Visa">
                   </div>
-                  <div class="col-md-3 col-xs-6 mt-1">
+                  <div class="col-md-3 col-6 mt-1">
                     <img src="<?= base_url('assets/')?>dist/img/credit/mastercard.png" alt="Mastercard">
                   </div>
-                  <div class="col-md-3 col-xs-6 mt-1">
+                  <div class="col-md-3 col-6 mt-1">
                     <img src="<?= base_url('assets/')?>dist/img/credit/american-express.png" alt="American Express">
                   </div>
-                  <div class="col-md-3 col-xs-6 mt-1">
+                  <div class="col-md-3 col-6 mt-1">
                     <img src="<?= base_url('assets/')?>dist/img/credit/paypal2.png" alt="Paypal">
                   </div>
                 </div>
@@ -102,11 +102,11 @@
                   <table class="table">
                     <tr>
                       <th style="width:50%">PPn:</th>
-                      <td>$250.30</td>
+                      <td>10%</td>
                     </tr>
                     <tr>
                       <th>Total:</th>
-                      <td>$265.24</td>
+                      <td>Rp.<?= $faktur['total']+(10/100*$faktur['total']); ?>,00</td>
                     </tr>
                   </table>
                 </div>

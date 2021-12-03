@@ -111,6 +111,7 @@ class Home extends CI_Controller {
 				$this->customer->insert($submit);
 				$this->session->set_userdata('game', $submit);
 				$this->session->set_userdata('dipilih', $select[0]);
+				$this->session->set_userdata('post', $game['select']);
 
 				redirect('home/faktur');
 			}
@@ -123,6 +124,7 @@ class Home extends CI_Controller {
 
 		$game['faktur'] = $this->session->userdata('game');
 		$game['select'] = $this->session->userdata('dipilih');
+		$game['post'] = $this->session->userdata('post');
 
 		$this->load->view('templates/header3');
 		$this->load->view('home/faktur', $game);
