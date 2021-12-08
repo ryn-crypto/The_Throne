@@ -94,6 +94,22 @@ class Admin extends CI_Controller
         redirect('admin/list');
     }
 
+    public function hapus()
+	{
+        
+        $id =  $this->uri->segment(3);
+
+        if (!$id) {
+            redirect('admin/pesanan');
+        } else {
+            $this->load->model('raid');
+            $this->raid->hapus($id);
+            
+            $this->session->set_flashdata('message', '<div class="alert alert-warning mb-2" role="alert">Data sudah dihapus !!</div>');
+            redirect('admin/pesanan');
+        }
+    }
+
     public function pesanan()
 	{
         $data['title'] = 'Pesanan';
@@ -106,6 +122,14 @@ class Admin extends CI_Controller
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
+
+
+        // mengambil data transaksi dari database
+        $this->load->model('raid');
+        $data['raid'] = $this->raid->index();
+
+        // var_dump($data['raid']);
+        // die;
 
 		$this->load->view('templates2/header', $data);
         $this->load->view('templates2/sidebar', $data);

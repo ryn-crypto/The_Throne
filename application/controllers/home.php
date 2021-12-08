@@ -102,6 +102,7 @@ class Home extends CI_Controller {
 					$submit = [
 						'id_harga' 		=> $select[0]['id'],
 						'no_pesanan' 	=> $nomor,
+						'pemesan' 		=> $game['select']['email'],
 						'id_game' 		=> $game['select']['idgame'],
 						'id_server' 	=> $game['select']['idserver'],
 						'qty'			=> $game['select']['bintang'],
