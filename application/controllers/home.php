@@ -50,70 +50,76 @@ class Home extends CI_Controller {
 			$this->load->model('customer');
 			$game['dipilih'] = $this->customer->gamedipilih($game['id']);
 
-			// form validation
-			$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', 
-			[
-				'required' => 'email harus diisi!',
-				'valid_email' => 'email tidak valid!'
-			]);
-			
-			$this->form_validation->set_rules('idgame', 'Id Game', 'required|trim', 
-			[
-				'required' => 'Id Game harus diisi!'
-			]);
-			
-			$this->form_validation->set_rules('idserver', 'Id Server', 'required|trim', 
-			[
-				'required' => 'Id server harus diisi!'
-			]);
+			if(!$game['dipilih']) {
+				redirect('home/daftargame');
+			} else {
 
-
-			if ($this->form_validation->run() == FALSE)
-			{
-				$this->load->view('templates/header2');
-				$this->load->view('home/form', $game);
-				$this->load->view('templates/footer2');
-			} 
-			else 
-			{
-				// load library
-				$this->load->helper('string');
-				$this->load->model('customer');
+				// form validation
+				$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', 
+				[
+					'required' => 'email harus diisi!',
+					'valid_email' => 'email tidak valid!'
+				]);
 				
-				// ambil data dari post
-				$game['select'] = $this->input->post();
+				$this->form_validation->set_rules('idgame', 'Id Game', 'required|trim', 
+				[
+					'required' => 'Id Game harus diisi!'
+				]);
 				
-				$que = [
-					'game_id' => $game['id'],
-					'tier' => $game['select']['tier']
-				];
-				
-				// ambil data dengan library
-				$nomor = random_string('alnum', 11);
-				$kdbayar = random_string('alpha', 8);
-				$select = $this->customer->select($que);
+				$this->form_validation->set_rules('idserver', 'Id Server', 'required|trim', 
+				[
+					'required' => 'Id server harus diisi!'
+				]);
 
-				$total = ($select[0]['harga'])*($game['select']['bintang']);
 
-				$submit = [
-					'id_harga' 		=> $select[0]['id'],
-					'no_pesanan' 	=> $nomor,
-					'id_game' 		=> $game['select']['idgame'],
-					'id_server' 	=> $game['select']['idserver'],
-					'qty'			=> $game['select']['bintang'],
-					'kode_bayar' 	=> $kdbayar,
-					'waktu_order'	=> time(),
-					'total' 		=> $total,
-					'status' 		=> '1'
-				];
+				if ($this->form_validation->run() == FALSE)
+				{
+					$this->load->view('templates/header2');
+					$this->load->view('home/form', $game);
+					$this->load->view('templates/footer2');
+				} 
+				else 
+				{
+					// load library
+					$this->load->helper('string');
+					$this->load->model('customer');
+					
+					// ambil data dari post
+					$game['select'] = $this->input->post();
+					
+					$que = [
+						'game_id' => $game['id'],
+						'tier' => $game['select']['tier']
+					];
+					
+					// ambil data dengan library
+					$nomor = random_string('alnum', 11);
+					$kdbayar = random_string('alpha', 8);
+					$select = $this->customer->select($que);
 
-				// insert into database with model
-				$this->customer->insert($submit);
-				$this->session->set_userdata('game', $submit);
-				$this->session->set_userdata('dipilih', $select[0]);
-				$this->session->set_userdata('post', $game['select']);
+					$total = ($select[0]['harga'])*($game['select']['bintang']);
 
-				redirect('home/faktur');
+					$submit = [
+						'id_harga' 		=> $select[0]['id'],
+						'no_pesanan' 	=> $nomor,
+						'id_game' 		=> $game['select']['idgame'],
+						'id_server' 	=> $game['select']['idserver'],
+						'qty'			=> $game['select']['bintang'],
+						'kode_bayar' 	=> $kdbayar,
+						'waktu_order'	=> time(),
+						'total' 		=> $total,
+						'id_horseman' 	=> '0',
+						'status' 		=> '1'
+					];
+
+					// insert into database with model
+					$this->customer->insert($submit);
+					$this->session->set_userdata('game', $submit);
+					$this->session->set_userdata('dipilih', $select[0]);
+					$this->session->set_userdata('post', $game['select']);
+
+					redirect('home/faktur');
+				}
 			}
 		}
 	
@@ -129,6 +135,28 @@ class Home extends CI_Controller {
 		$this->load->view('templates/header3');
 		$this->load->view('home/faktur', $game);
 		$this->load->view('templates/footer2');
+
+	}
+
+	public function print()
+	{
+
+		$game['faktur'] = $this->session->userdata('game');
+		$game['select'] = $this->session->userdata('dipilih');
+		$game['post'] = $this->session->userdata('post');
+
+		$this->load->view('home/fakturPrint', $game);
+
+	}
+
+	public function process()
+	{
+
+		if (!$this->session->userdata('game')) {
+			redirect('home');
+		} else {
+			$this->load->view('home/process');
+		}
 
 	}
 	

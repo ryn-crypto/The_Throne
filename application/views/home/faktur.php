@@ -49,7 +49,7 @@
               <div class="col-sm-4 invoice-col">
                 <b>Invoice No</b><br>
                 <b>No Pemesanan :</b> <?= $faktur['no_pesanan']; ?><br>
-                <b>Tenggat Bayar : </b>  <?= date("d F Y", strtotime("+1 days", $faktur['waktu_order'])); ?><br>
+                <b>Tenggat Bayar : </b> <?= date("d F Y", strtotime("+1 days", $faktur['waktu_order'])); ?><br>
               </div>
             </div>
             <div class="row">
@@ -59,6 +59,7 @@
                   <tr>
                     <th>Nama Game</th>
                     <th>Jumlah bintang</th>
+                    <th>Harga (satuan)</th>
                     <th>Subtotal</th>
                   </tr>
                   </thead>
@@ -66,7 +67,8 @@
                   <tr>
                     <td><?= $post['game']; ?></td>
                     <td><?= $post['bintang']; ?></td>
-                    <td>Rp.<?= $faktur['total']; ?>,00</td>
+                    <td>Rp. <?= number_format($select['harga'], 2, ",", ".") ?></td>
+                    <td>Rp. <?= number_format($faktur['total'], 2, ",", "."); ?></td>
                   </tr>
                   </tbody>
                 </table>
@@ -75,7 +77,7 @@
           
             <div class="row">
               <div class="col-6">
-                <p class="lead">Cara Pembayaran:</p>
+                <p class="lead">Metode Pembayaran:</p>
                 <div class="row">
                   <div class="col-md-3 col-6 mt-1">
                     <img src="<?= base_url('assets/')?>dist/img/credit/visa.png" alt="Visa">
@@ -106,7 +108,7 @@
                     </tr>
                     <tr>
                       <th>Total:</th>
-                      <td>Rp.<?= $faktur['total']+(10/100*$faktur['total']); ?>,00</td>
+                      <td>Rp. <?= number_format($faktur['total']+(10/100*$faktur['total']), 2, ",", "."); ?></td>
                     </tr>
                   </table>
                 </div>
@@ -115,12 +117,9 @@
           
             <div class="row no-print">
               <div class="col-12">
-                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit Payment
-                </button>
-                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                  <i class="fas fa-download"></i> Generate PDF
-                </button>
+                <a href="<?= base_url('home/print')?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                <a href="<?= base_url('home/process')?>" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit Payment
+                <a/>
               </div>
             </div>
           </div>
