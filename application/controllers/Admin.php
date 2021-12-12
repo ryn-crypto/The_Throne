@@ -117,12 +117,13 @@ class Admin extends CI_Controller
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
         $this->load->model('menu');
+        $this->load->model('daftar');
 
-        $data['user'] = $this->registrasi->ambil_data($email, 'user');
-        $data['role'] = $this->registrasi->join_data($email);
-        $data['menu'] = $this->menu->index($data['role']['role_id']);
-        $data['sub_menu'] = $this->menu->sub_menu();
-
+        $data['user']       = $this->registrasi->ambil_data($email, 'user');
+        $data['role']       = $this->registrasi->join_data($email);
+        $data['menu']       = $this->menu->index($data['role']['role_id']);
+        $data['sub_menu']   = $this->menu->sub_menu();
+        $data['horseman']   = $this->daftar->index();
 
         // mengambil data transaksi dari database
         $this->load->model('raid');

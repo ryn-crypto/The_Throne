@@ -17,6 +17,9 @@
     <section class="content">
       <div class="card m-3">
         <div class="card-header border-bottom border-info">
+          <div class="col-11">
+            <?= $this->session->flashdata('message') ?>
+          </div>
           <h3 class="card-title">Pesanan dari customer</h3>
         </div>
         <!-- /.card-header -->

@@ -10,7 +10,6 @@ class Registrasi extends CI_Model {
 
 	public function ambil_data($data, $tabel)
 	{
-
 		return $this->db->get_where($tabel, $data)->row_array();
 	}
 

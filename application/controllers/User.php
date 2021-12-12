@@ -179,6 +179,9 @@ class User extends CI_Controller
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
 
+        // ambil data dari database
+        $this->load->model('raid');
+        $data['pesanan'] = $this->raid->pesanan();
 
 		$this->load->view('templates2/header', $data);
         $this->load->view('templates2/sidebar', $data);
@@ -189,6 +192,8 @@ class User extends CI_Controller
 
     public function raid()
     {
+
+        // data menu
         $data['title'] = 'Sedang Raid';
     
         $email = ['email' =>  $this->session->userdata('email')];
@@ -199,12 +204,45 @@ class User extends CI_Controller
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
+
+        // -----
+
+
+        if (!$this->uri->segment(3)) {
+            $this->load->view('templates2/header', $data);
+            $this->load->view('templates2/sidebar', $data);
+            $this->load->view('templates2/topbar', $data);
+            $this->load->view('user/raid', $data);
+            $this->load->view('templates2/footer');
+        } else {
+            $uri    = $this->uri->segment(3);
+
+            $cek = [
+                'id_horseman' => $data['user']['id'],
+                'status'    => 3
+            ];
+
+            // ambil data
+            $this->load->model('raid');
+            $pesanan = $this->raid->cek($cek);
+
+            // cek data
+            if (!$pesanan) {
+                $update  = [
+                    'id_horseman'   => $data['user']['id'],
+                    'status'        => 3 
+                ];
     
-    
-        $this->load->view('templates2/header', $data);
-        $this->load->view('templates2/sidebar', $data);
-        $this->load->view('templates2/topbar', $data);
-        $this->load->view('user/raid', $data);
-        $this->load->view('templates2/footer');
+                $this->load->model('raid');
+                $this->raid->rider($update, $uri);
+
+                $this->session->set_flashdata('message', '<div class="alert alert-warning mb-2" role="alert">Selesaikan pesanan sebelum waktu habis !!</div>');
+                redirect('user/raid');
+            } else {
+
+                var_dump($pesanan);
+
+            }
+        }
     }
 }

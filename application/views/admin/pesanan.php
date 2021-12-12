@@ -26,9 +26,10 @@
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills row text-center">
-                    <li class="nav-item col-md-4"><a class="nav-link active" href="#masuk" data-toggle="tab">Pesanan Masuk</a></li>
-                    <li class="nav-item col-md-4"><a class="nav-link" href="#belum" data-toggle="tab">Pesanan Belum dibayar</a></li>
-                    <li class="nav-item col-md-4"><a class="nav-link" href="#selesai" data-toggle="tab">Pesanan Selesai</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link active" href="#masuk" data-toggle="tab">Pesanan Masuk</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link" href="#belum" data-toggle="tab">Pesanan Belum dibayar</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link" href="#proses" data-toggle="tab">Pesanan  Sedang Diproses</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link" href="#selesai" data-toggle="tab">Pesanan Selesai</a></li>
                   </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -85,6 +86,7 @@
                                 <th scope="col">Nama Game</th>
                                 <th scope="col">Tier</th>
                                 <th scope="col">Naik (bintang)</th>
+                                <th scope="col">Tgl Pesan</th>
                                 <th scope="col">Pemesan</th>
                                 <th scope="col" style="width: 190px">Tindakan</th>
                               </tr>
@@ -99,6 +101,7 @@
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['tier']; ?></td>
                                 <td><?= $r['bintang_point']; ?></td>
+                                <td><?= date("d F Y", $r['waktu_order']);?></td>
                                 <td><?= strtok($r['pemesan'], '@');?></td>
                                 <td class="text-muted text-center">
                                   <a href="" class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">hubungi</a>
@@ -116,6 +119,53 @@
                       </div>
                     </div>
                     <!-- pesanan belum di bayar end -->
+
+                    <!-- pesanan diproses -->
+                    <div class="tab-pane" id="proses">
+                      <div class="active tab-pane" id="masuk">
+                        <div class="table-responsive">
+                          <table class="table table-bordered m-0">
+                            <thead>
+                              <tr class="text-center">
+                                <th scope="col" style="width: 10px">No</th>
+                                <th scope="col">No Pesanan</th>
+                                <th scope="col">Nama Game</th>
+                                <th scope="col">Tier</th>
+                                <th scope="col">Naik (bintang)</th>
+                                <th scope="col">Pemesan</th>
+                                <th scope="col">Horseman</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php $no = 1;
+                              foreach ($raid as $r) : 
+                              if ($r['status'] == 3) :?>
+                              <tr>
+                                <th scope="row"><?= $no++; ?></th>
+                                <td><?= $r['no_pesanan']; ?></td>
+                                <td><?= $r['nama']; ?></td>
+                                <td><?= $r['tier']; ?></td>
+                                <td><?= $r['bintang_point']; ?></td>
+                                <td><?= strtok($r['pemesan'], '@');?></td>
+                                <td>
+                                  <?php
+                                  foreach ($horseman as $h) {
+                                    if ($r['id_horseman'] == $h['id']) {
+                                      echo($h['nama']);
+                                    }
+                                  } ?>
+                                </td>
+                              </tr>
+                              <?php
+                              endif;
+                              endforeach;
+                              ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>                      
+                    </div>
+                    <!-- pesanan selesai end -->
 
                     <!-- pesanan selesai -->
                     <div class="tab-pane" id="selesai">
@@ -135,7 +185,7 @@
                             <tbody>
                               <?php $no = 1;
                               foreach ($raid as $r) : 
-                              if ($r['status'] == 3) :?>
+                              if ($r['status'] == 4) :?>
                               <tr>
                                 <th scope="row"><?= $no++; ?></th>
                                 <td><?= $r['no_pesanan']; ?></td>

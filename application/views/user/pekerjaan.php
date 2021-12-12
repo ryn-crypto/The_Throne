@@ -17,7 +17,7 @@
     <section class="content">
       <div class="card m-3">
         <div class="card-header border-bottom border-info">
-          <h3 class="card-title">Pesanan dari customer</h3>
+          <h2 class="card-title ml-2">Pesanan masuk</h2>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -26,26 +26,29 @@
               <thead>
                 <tr class="text-center">
                   <th scope="col" style="width: 10px">No</th>
-                  <th scope="col">No Pesanan</th>
                   <th scope="col">Nama Game</th>
                   <th scope="col">Tier</th>
-                  <th scope="col">Level</th>
-                  <th scope="col" style="width: 170px">Tindakan</th>
+                  <th scope="col">Naik (bintang)</th>
+                  <th scope="col">Pemesan</th>
+                  <th scope="col" style="width: 180px">Tindakan</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>12345678910</td>
-                  <td>Mobile Legend</td>
-                  <td>Master</td>
-                  <td>*1 s/d *5</td>
-                  <td class="text-muted">
-                    <a href="" class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">rincian</a>
-                    |
-                    <a href="" class="btn btn-outline-warning">Raid</a>
-                  </td>
-                </tr>
+                <?php $no = 1;
+                  foreach ($pesanan as $r) :?>
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td><?= $r['nama']; ?></td>
+                    <td><?= $r['tier']; ?></td>
+                    <td><?= $r['bintang_point']; ?></td>
+                    <td><?= strtok($r['pemesan'], '@');?></td>
+                    <td class="text-muted text-center">
+                      <a class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">Rincian</a>
+                      |
+                      <a href="<?= base_url('user/raid/') .$r['no_pesanan'] ?>" class="btn btn-outline-warning">Raid</a>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
               </tbody>
             </table>
           </div>
