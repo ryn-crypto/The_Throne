@@ -118,8 +118,7 @@
             <div class="row no-print">
               <div class="col-12">
                 <a href="<?= base_url('home/print')?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                <a href="<?= base_url('home/process')?>" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit Payment
-                <a/>
+                <a href="<?= base_url('home/process')?>" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit Payment<a/>
               </div>
             </div>
           </div>

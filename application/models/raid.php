@@ -45,4 +45,15 @@ class Raid extends CI_Model {
 		return $this->db->get()->result_array();
 	}
 
+	public function live($data)
+	{
+		$this->db->select('*');
+		$this->db->from('transaksi');
+		$this->db->join('game_rank', 'transaksi.id_harga = game_rank.id');
+		$this->db->join('daftar_game', 'game_rank.game_id = daftar_game.id');
+		$this->db->where($data);
+        $this->db->order_by('transaksi.id', 'ASC');
+		return $this->db->get()->result_array();
+	}
+
 }

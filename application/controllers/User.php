@@ -190,30 +190,15 @@ class User extends CI_Controller
         $this->load->view('templates2/footer');
 	}
 
-    public function raid()
-    {
-
-        // data menu
-        $data['title'] = 'Sedang Raid';
-    
+    public function take()
+	{
+        // data session
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
-        $this->load->model('menu');
-    
         $data['user'] = $this->registrasi->ambil_data($email, 'user');
-        $data['role'] = $this->registrasi->join_data($email);
-        $data['menu'] = $this->menu->index($data['role']['role_id']);
-        $data['sub_menu'] = $this->menu->sub_menu();
-
-        // -----
-
 
         if (!$this->uri->segment(3)) {
-            $this->load->view('templates2/header', $data);
-            $this->load->view('templates2/sidebar', $data);
-            $this->load->view('templates2/topbar', $data);
-            $this->load->view('user/raid', $data);
-            $this->load->view('templates2/footer');
+            redirect('user/pekerjaan');
         } else {
             $uri    = $this->uri->segment(3);
 
@@ -236,13 +221,46 @@ class User extends CI_Controller
                 $this->load->model('raid');
                 $this->raid->rider($update, $uri);
 
-                $this->session->set_flashdata('message', '<div class="alert alert-warning mb-2" role="alert">Selesaikan pesanan sebelum waktu habis !!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success mb-2" role="alert">Selesaikan pesanan sebelum waktu habis !!</div>');
                 redirect('user/raid');
             } else {
-
-                var_dump($pesanan);
-
+                $this->session->set_flashdata('message', '<div class="alert alert-warning mb-2" role="alert">Kamu masih memiliki tugas raid yang belum selesai ! selesaikan raidmu untuk mengambil tugas baru !!</div>');
+                redirect('user/pekerjaan');
             }
-        }
+        }   
+
+    }
+
+    public function raid()
+    {
+
+        // data menu
+        $data['title'] = 'Sedang Raid';
+    
+        $email = ['email' =>  $this->session->userdata('email')];
+        $this->load->model('registrasi');
+        $this->load->model('menu');
+    
+        $data['user'] = $this->registrasi->ambil_data($email, 'user');
+        $data['role'] = $this->registrasi->join_data($email);
+        $data['menu'] = $this->menu->index($data['role']['role_id']);
+        $data['sub_menu'] = $this->menu->sub_menu();
+
+        // menyiapkan data 
+
+        $game  = [
+            'id_horseman'   => $data['user']['id'],
+            'status'        => 3 
+        ];
+        $this->load->model('raid');
+        $data['game'] = $this->raid->live($game)['0'];
+
+        // view -----
+
+        $this->load->view('templates2/header', $data);
+        $this->load->view('templates2/sidebar', $data);
+        $this->load->view('templates2/topbar', $data);
+        $this->load->view('user/raid', $data);
+        $this->load->view('templates2/footer');
     }
 }

@@ -45,13 +45,59 @@ CREATE TABLE `game_rank` (
   `bintang_point` int(10) DEFAULT NULL,
   `harga` int(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `game_rank` */
 
 insert  into `game_rank`(`id`,`game_id`,`tier`,`bintang_point`,`harga`) values 
-(1,2,'warrior1',1,1000),
-(2,2,'warrior2',1,1500);
+(1,1,'Archon 2',1,1000),
+(2,1,'Archon 3',1,1500),
+(3,1,'Archon 4',1,1800),
+(4,1,'Legend 1',1,2000),
+(5,1,'Legend 2',1,2500),
+(6,1,'Legend 3',1,2800),
+(7,1,'Ancient',1,3000),
+(8,2,'Legend 5',1,1000),
+(9,2,'Legend 4',1,1500),
+(10,2,'Legend 3',1,1800),
+(11,2,'Mythic 5',1,2000),
+(12,2,'Mythic 4',1,2500),
+(13,2,'Mythic 3',1,2800),
+(14,3,'Gold 2',1,2000),
+(15,3,'Gold 3',1,2500),
+(16,3,'Gold 4',1,2800),
+(17,3,'Platinum 2',1,3000),
+(18,3,'Platinum 3',1,3500),
+(19,3,'Platinum 4',1,3800),
+(20,3,'Diamond',1,4000),
+(21,4,'Platinum 3',1,1000),
+(22,4,'Platinum 4',1,1500),
+(23,4,'Platinum 5',1,1800),
+(24,4,'Diamond 3',1,2000),
+(25,4,'Diamond 4',1,2500),
+(26,4,'Diamond 5',1,2800),
+(27,4,'Crown',1,3000),
+(28,5,'Platinum 1',1,1000),
+(29,5,'Platinum 2',1,1500),
+(30,5,'Platinum 3',1,1800),
+(31,5,'Diamond 1',1,2000),
+(32,5,'Diamond 2',1,2500),
+(33,5,'Diamond 3',1,2800),
+(34,5,'Imortal',1,3000),
+(35,6,'Platinum 3',1,2000),
+(36,6,'Platinum 4',1,2500),
+(37,6,'Platinum 5',1,2800),
+(38,6,'Diamond 3',1,3000),
+(39,6,'Diamond 4',1,3500),
+(40,6,'Diamond 5',1,3800),
+(41,6,'Crown',1,4000),
+(42,7,'Elite 3',1,1000),
+(43,7,'Elite 4',1,1500),
+(44,7,'Elite 5',1,1800),
+(45,7,'Pro 3',1,2000),
+(46,7,'Pro 4',1,2500),
+(47,7,'Pro 5',1,2800),
+(48,7,'Master',1,3000);
 
 /*Table structure for table `transaksi` */
 
@@ -60,14 +106,27 @@ DROP TABLE IF EXISTS `transaksi`;
 CREATE TABLE `transaksi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_harga` int(11) DEFAULT NULL,
-  `no_pesanan` int(11) DEFAULT NULL,
+  `no_pesanan` varchar(11) DEFAULT NULL,
+  `pemesan` varchar(50) DEFAULT NULL,
   `id_game` varchar(10) DEFAULT NULL,
   `id_server` varchar(10) DEFAULT NULL,
+  `qty` int(2) DEFAULT NULL,
+  `kode_bayar` varchar(8) DEFAULT NULL,
+  `waktu_order` int(10) DEFAULT NULL,
   `total` int(50) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  `id_horseman` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `transaksi` */
+
+insert  into `transaksi`(`id`,`id_harga`,`no_pesanan`,`pemesan`,`id_game`,`id_server`,`qty`,`kode_bayar`,`waktu_order`,`total`,`status`,`id_horseman`) values 
+(20,20,'tMBmDWabPjI','joko@mail.com','12314','43214',3,'NRZKHhFY',1638971165,9000,'3',10),
+(25,1,'IBJ5CQDxOn1','joko@mail.com','12314','43214',1,'QlhmvJdH',1639059166,1000,'2',0),
+(27,3,'w0mRxVIufQD','erik@gmail.com','12314','43214',4,'sihIlLgK',1639060621,7200,'3',4),
+(28,7,'1234','joko@mail.com','12314','43214',3,'NRZKHhFY',1638971165,9000,'2',0),
+(29,7,'321','joko@mail.com','12314','43214',3,'NRZKHhFY',1638971165,9000,'2',0);
 
 /*Table structure for table `user` */
 
@@ -86,14 +145,17 @@ CREATE TABLE `user` (
   `tempat_tinggal` varchar(128) DEFAULT NULL,
   `no_hp` varchar(13) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
 
 insert  into `user`(`id`,`nama`,`email`,`gambar`,`password`,`role_id`,`waktu_gabung`,`aktif`,`tentang`,`tempat_tinggal`,`no_hp`) values 
 (4,'Riyan First Tiyanto','riyandotianto2@gmail.com','3600_9_10.jpg','$2y$10$GLfBiFU0YHTEQ3xh2gaxZem0hJASvDrOWuBMhxZcPFJw0dX0q6jbG',1,1635650970,1,'  Web Designer / UX / Graphic Artist  ','Demo Street 123, Demo City 04312, NJ','081311011567'),
-(6,'Dodi dadu','dody21@gmail.com','assts.png','$2y$10$M3.miyiKs/Hg5O/abDlbue6Ya8EdZg/RHg3j/iraM3PI5L/NfoRke',2,1635673334,0,' ini catatan   ','coba','coba'),
-(9,'bobon','bobon@mail.com','assts.png','$2y$10$M3.miyiKs/Hg5O/abDlbue6Ya8EdZg/RHg3j/iraM3PI5L/NfoRke',3,1635673334,1,' ini catatan   ','coba','coba');
+(9,'bobon','bobon@mail.com','assts.png','$2y$10$M3.miyiKs/Hg5O/abDlbue6Ya8EdZg/RHg3j/iraM3PI5L/NfoRke',3,1635673334,1,' ini catatan   ','coba','coba'),
+(10,'Riyan first Tiyanto','19200366@bsi.ac.id','3600_9_10.jpg','$2y$10$GLfBiFU0YHTEQ3xh2gaxZem0hJASvDrOWuBMhxZcPFJw0dX0q6jbG',2,1635673334,1,'catatan','cek','cek'),
+(11,'Ilham Alhapis','19201124@bsi.ac.id','assts.png','$2y$10$M3.miyiKs/Hg5O/abDlbue6Ya8EdZg/RHg3j/iraM3PI5L/NfoRke',2,1635673334,1,'catatan','cek','cek'),
+(12,'Aryoso Bimo','19200125@bsi.ac.id','assts.png','$2y$10$M3.miyiKs/Hg5O/abDlbue6Ya8EdZg/RHg3j/iraM3PI5L/NfoRke',2,1635673334,1,'catatan','cek','cek'),
+(13,'Anggi Indra Pratama','19200429@bsi.ac.id','assts.png','$2y$10$M3.miyiKs/Hg5O/abDlbue6Ya8EdZg/RHg3j/iraM3PI5L/NfoRke',2,1635673334,1,'catatan','cek','cek');
 
 /*Table structure for table `user_akses_menu` */
 

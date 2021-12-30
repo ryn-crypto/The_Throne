@@ -20,40 +20,74 @@
           <div class="col-11">
             <?= $this->session->flashdata('message') ?>
           </div>
-          <h3 class="card-title">Pesanan dari customer</h3>
+          <h3 class="card-title">Pesanan yang sedang anda proses</h3>
         </div>
-        <!-- /.card-header -->
+        <!-- content -->
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered m-0">
-              <thead>
-                <tr class="text-center">
-                  <th scope="col" style="width: 10px">No</th>
-                  <th scope="col">No Pesanan</th>
-                  <th scope="col">Nama Game</th>
-                  <th scope="col">Tier</th>
-                  <th scope="col">Level</th>
-                  <th scope="col" style="width: 170px">Tindakan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>12345678910</td>
-                  <td>Mobile Legend</td>
-                  <td>Master</td>
-                  <td>*1 s/d *5</td>
-                  <td class="text-muted">
-                    <a href="" class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">rincian</a>
-                    |
-                    <a href="" class="btn btn-outline-warning">Raid</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row">
+                <!-- game iamge -->
+                <div class="col-md-12 card card-primary card-outline">
+                  <div class="card-body box-profile">
+                    <div class="text-center pb-2 px-md-5">
+                      <img class="img-thumbnail img-fluid img-circle"
+                          src="<?= base_url('assets/images/gamelist/') . $game['gambar']; ?>" alt="Game profile picture">
+                    </div>
+                    <h3 class="profile-username text-center"><?= $game['nama']; ?></h3>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <div class="col-md text-center">
+                  <div class="card-body box-profile">
+                    <div class="row">
+                      <a href="" class="col-md-8 btn btn-info"><i class="fas fa-paper-plane"></i> Hubungi customer</a>
+                      <a href="<?= base_url('user/finish')?>" class="col-md btn btn-success ml-2"><i class="fab fa-get-pocket"></i> Selesai</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+            <!-- About Me Box -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Informasi Customer</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <strong><i class="fas fa-user-tie mr-1"></i> Customer</strong>
+                  <h4 class="text-muted mt-1"><?= strtok($game['pemesan'], '@');?></h4>
+
+                  <hr class="bg-light">
+
+                  <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
+                  <h4 class="text-muted mt-1"><?= $game['pemesan'];?></h4>
+
+                  <hr class="bg-light">
+
+                  <strong><i class="fas fa-cogs mr-1"></i> Id Game</strong>
+                  <h4 class="text-muted mt-1"><?= $game['id_game'];?></h4>
+                  
+                  <hr class="bg-light">
+
+                  <strong><i class="fas fa-lock mr-1"></i> Id Server</strong>
+                  <h4 class="text-muted mt-1"><?= $game['id_server'];?></h4>
+
+                  <hr class="bg-light">
+
+                  <strong><i class="fas fa-star mr-1"></i> Tugas</strong>
+                  <h4 class="text-muted mt-1"><?= $game['qty'];?> bintang</h4>
+
+                </div>
+              </div>
+            </div>
+            <!-- deskripsi -->
           </div>
         </div>
-        
+        <!-- content -->
       </div>
     </section>
 

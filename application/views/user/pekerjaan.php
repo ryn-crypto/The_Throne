@@ -17,6 +17,9 @@
     <section class="content">
       <div class="card m-3">
         <div class="card-header border-bottom border-info">
+          <div class="col-11">
+            <?= $this->session->flashdata('message') ?>
+          </div>
           <h2 class="card-title ml-2">Pesanan masuk</h2>
         </div>
         <!-- /.card-header -->
@@ -45,7 +48,7 @@
                     <td class="text-muted text-center">
                       <a class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">Rincian</a>
                       |
-                      <a href="<?= base_url('user/raid/') .$r['no_pesanan'] ?>" class="btn btn-outline-warning">Raid</a>
+                      <a href="<?= base_url('user/take/') .$r['no_pesanan'] ?>" class="btn btn-outline-warning">Raid</a>
                     </td>
                   </tr>
                 <?php endforeach; ?>
